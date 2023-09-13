@@ -120,14 +120,14 @@ class BaseQAWithSourcesChain(Chain, ABC):
 
     def _split_sources(self, answer: str) -> Tuple[str, str]:
         """Split sources from answer."""
-        if re.search(r"SOURCES?:", answer, re.IGNORECASE):
-            answer, sources = re.split(
-                r"SOURCES?:|QUESTION:\s", answer, flags=re.IGNORECASE
+        if re.search(r"TITLE?:", answer, re.IGNORECASE):
+            answer, title = re.split(
+                r"TITLE?:|QUESTION:\s", answer, flags=re.IGNORECASE
             )[:2]
-            sources = re.split(r"\n", sources)[0].strip()
+            title = re.split(r"\n", title)[0].strip()
         else:
-            sources = ""
-        return answer, sources
+            title = ""
+        return answer, title
 
     @abstractmethod
     def _get_docs(
